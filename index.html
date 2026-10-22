@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Матвей Белочкин — студент HSE</title>
+<meta name="description" content="Портфолио Матвея Белочкина — студент НИУ ВШЭ." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfcfa;
+    --bg-soft: #f5f3ef;
+    --card: #ffffff;
+    --border: #e6e2da;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --accent: #ff6b5b;
+    --accent-2: #2b8a7e;
+    --accent-soft: #ffe8e4;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(253, 252, 250, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+  .logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    padding: 100px 0 60px;
+    background: radial-gradient(circle at 15% 20%, rgba(255, 107, 91, 0.12), transparent 45%),
+                radial-gradient(circle at 85% 70%, rgba(43, 138, 126, 0.10), transparent 45%);
+  }
+  .hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 800px) { .hero-inner { grid-template-columns: 1fr; } }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(255, 107, 91, 0.3);
+    color: var(--accent); font-size: 13px; font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 800; line-height: 1.1; margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, #ff9b70 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle { font-size: 1.1rem; color: var(--muted); max-width: 560px; margin-bottom: 32px; }
+
+  .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 12px;
+    font-weight: 600; font-size: 15px;
+    transition: transform .2s, box-shadow .2s, background .2s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--text); color: #fff;
+    box-shadow: 0 8px 24px rgba(26, 26, 26, 0.15);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(26, 26, 26, 0.25); }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg-soft); }
+
+  .avatar-wrap { display: flex; justify-content: center; }
+  .avatar {
+    width: 260px; height: 260px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #ffab7b);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; font-weight: 800; color: #fff;
+    box-shadow: 0 20px 60px rgba(255, 107, 91, 0.35);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  /* SECTIONS */
+  section { padding: 90px 0; }
+  .section-title {
+    font-size: 2rem; font-weight: 800; margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .section-title span { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 1rem; display: block; margin-bottom: 8px; font-weight: 400; }
+  .section-sub { color: var(--muted); margin-bottom: 48px; max-width: 600px; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-text p { color: var(--muted); margin-bottom: 16px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .facts { display: grid; gap: 12px; }
+  .fact {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px; background: var(--card);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    transition: border-color .2s, transform .2s;
+  }
+  .fact:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .fact-icon { font-size: 1.4rem; }
+  .fact-label { font-size: 13px; color: var(--muted); }
+  .fact-value { font-weight: 600; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 30px rgba(26,26,26,0.06); }
+  .skill-card h3 { font-size: 1rem; margin-bottom: 16px; color: var(--accent-2); font-family: 'JetBrains Mono', monospace; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    padding: 6px 12px; border-radius: 8px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(255, 107, 91, 0.25);
+    font-size: 13px; color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(var(--accent), var(--accent-2));
+    opacity: 0.4;
+  }
+  .timeline-item { position: relative; padding-bottom: 36px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -28px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--accent);
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-period { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent-2); margin-bottom: 6px; font-weight: 600; }
+  .timeline-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+  .timeline-company { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+  .timeline-desc { color: var(--muted); font-size: 15px; }
+
+  /* HOBBIES */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+  .project {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 26px;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+    display: flex; flex-direction: column;
+  }
+  .project:hover { transform: translateY(-6px); border-color: var(--accent-2); box-shadow: 0 16px 40px rgba(26,26,26,0.07); }
+  .project .emoji { font-size: 2rem; margin-bottom: 12px; }
+  .project h3 { font-size: 1.15rem; margin-bottom: 10px; }
+  .project p { color: var(--muted); font-size: 14.5px; flex: 1; }
+
+  /* CONTACT */
+  .contact-box {
+    text-align: center;
+    background: linear-gradient(135deg, var(--accent-soft), rgba(43, 138, 126, 0.08));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 60px 30px;
+  }
+  .contact-box h2 { font-size: 2rem; margin-bottom: 14px; }
+  .contact-box p { color: var(--muted); margin-bottom: 30px; }
+  .socials { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 12px;
+    background: var(--card); border: 1px solid var(--border);
+    font-weight: 600; font-size: 14px;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .social-btn:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,91,0.15); }
+
+  footer { text-align: center; padding: 30px 0; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+
+  /* ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">&lt;hoglin1/&gt;</div>
+    <div class="nav-links">
+      <a href="#about">Обо мне</a>
+      <a href="#skills">Навыки</a>
+      <a href="#experience">Опыт</a>
+      <a href="#hobbies">Интересы</a>
+      <a href="#contact">Контакты</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="badge">Открыт к знакомству</div>
+      <h1>Привет, я <span class="gradient-text">Матвей Белочкин</span></h1>
+      <p class="subtitle">
+        Студент НИУ ВШЭ. Учусь, играю в игрушки, смотрю «Южный парк» и потихоньку развиваю прикладные навыки. В целом — не бытовой инвалид.
+      </p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary">Связаться →</a>
+        <a href="#skills" class="btn btn-ghost">Мои навыки</a>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar">МБ</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container reveal">
+    <h2 class="section-title"><span>01. Обо мне</span>Кто я</h2>
+    <!-- Убрал фразу "Коротко и по делу - без пафоса" -->
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Я — студент НИУ ВШЭ. Еле как свожу концы с концами между парами, дедлайнами и желанием поспать подольше. Учусь, стараюсь, местами даже получается.</p>
+        <p>В свободное время играю в игрушки и пересматриваю «Южный парк» — оттуда, кстати, и навык понимать английский на слух. В компах тоже чуток разбираюсь, а прикладные навыки развиты лучше, чем принято ожидать от человека, который вчера забыл, где оставил ключи.</p>
+        <p>В общем, если нужен человек, который и с техникой на «ты», и с чувством юмора — вы по адресу.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="fact-icon">🎓</span><div><div class="fact-label">Учусь в</div><div class="fact-value">НИУ ВШЭ</div></div></div>
+        <!-- Изменил локацию на Санкт-Петербург -->
+        <div class="fact"><span class="fact-icon">📍</span><div><div class="fact-label">Локация</div><div class="fact-value">Санкт-Петербург</div></div></div>
+        <div class="fact"><span class="fact-icon">🗣️</span><div><div class="fact-label">Английский</div><div class="fact-value">Хорошо (вроде как)</div></div></div>
+        <div class="fact"><span class="fact-icon">🎮</span><div><div class="fact-label">Хобби</div><div class="fact-value">Игры, «Южный парк»</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--bg-soft);">
+  <div class="container reveal">
+    <h2 class="section-title"><span>02. Навыки</span>Что я умею</h2>
+    <p class="section-sub">Скромно, но честно.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>// языки</h3>
+        <div class="tags">
+          <span class="tag">Русский</span>
+          <span class="tag">English (хорошо, вроде)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>// техника</h3>
+        <div class="tags">
+          <span class="tag">Компьютерная грамотность</span>
+          <span class="tag">Базовое ПО</span>
+          <span class="tag">Гуглинг</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>// прикладное</h3>
+        <div class="tags">
+          <span class="tag">Прикладные навыки</span>
+          <span class="tag">Быстро разбираюсь</span>
+          <span class="tag">Не бытовой инвалид</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container reveal">
+    <h2 class="section-title"><span>03. Опыт</span>Где я учился и учился</h2>
+    <p class="section-sub">Всё честно — школой пока и ограничиваюсь.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <!-- Изменил год на 2026 -->
+        <div class="timeline-period">2026 — н.в.</div>
+        <div class="timeline-title">Студент бакалавриата</div>
+        <div class="timeline-company">НИУ ВШЭ</div>
+        <p class="timeline-desc">Учусь, сдаю, стараюсь не утонуть в дедлайнах. Опыт получаю по мере поступления задач.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">До 2026</div>
+        <div class="timeline-title">Школа № 619</div>
+        <div class="timeline-company">г. Санкт-Петербург</div>
+        <p class="timeline-desc">Здесь получил базу: научился читать, считать, гуглить и отвечать у доски без паники. Заодно подтянул английский.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies" style="background: var(--bg-soft);">
+  <div class="container reveal">
+    <h2 class="section-title"><span>04. Интересы</span>Чем занимаюсь вне учёбы</h2>
+    <p class="section-sub">Важная часть резюме — не только про работу.</p>
+    <div class="projects-grid">
+      <div class="project">
+        <div class="emoji">🎮</div>
+        <h3>Игры</h3>
+        <p>Играю — не только ради удовольствия, но и для тренировки реакции, стратегического мышления и умения договариваться с командой.</p>
+      </div>
+      <div class="project">
+        <div class="emoji">📺</div>
+        <h3>«Южный парк»</h3>
+        <!-- Изменил описание -->
+        <p>Интересный сатирический сериал с черным юмором. Помогает прокачать понимание английского на слух и чувство иронии.</p>
+      </div>
+      <div class="project">
+        <div class="emoji">💻</div>
+        <h3>Техника</h3>
+        <p>Разбираюсь в компьютерах на уровне «настрою, переустановлю, объясню родственникам, почему у них снова всё сломалось».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container reveal">
+    <div class="contact-box">
+      <h2>Напишите мне 🙌</h2>
+      <p>Открыт к общению, проектам и знакомствам.</p>
+      <div class="socials">
+        <a class="social-btn" href="https://github.com/hoglin1" target="_blank" rel="noopener">GitHub</a>
+        <a class="social-btn" href="https://t.me/hoglin21" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">© 2026 Матвей Белочкин. Сделано с иронией и минимальным количеством сна.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
+<>
